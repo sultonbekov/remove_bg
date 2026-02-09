@@ -2,7 +2,7 @@
 """
 Удалитель Фонов с Изображений
 Автор: Isabek
-GitHub: https://github.com/sultonbekov/remove_bg
+GitHub: https://github.com/isabek/remove_bg
 
 Мощный инструмент для удаления фонов с использованием AI моделей.
 Поддерживает одиночные изображения и пакетную обработку.
