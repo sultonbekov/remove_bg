@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-Скрипт для удаления фонов с изображений
+Удалитель Фонов с Изображений
 Автор: Isabek
-Использует библиотеку rembg для удаления фонов с изображений
+GitHub: https://github.com/sultonbekov/remove_bg
+
+Мощный инструмент для удаления фонов с использованием AI моделей.
+Поддерживает одиночные изображения и пакетную обработку.
 """
 
 import os
@@ -110,9 +113,11 @@ def batch_remove_background(input_dir, output_dir=None, model='u2net'):
     print(f"  Выходная директория: {output_dir}")
 
 
-def main():
+def create_parser() -> argparse.ArgumentParser:
+    """Создаёт парсер аргументов командной строки"""
     parser = argparse.ArgumentParser(
-        description="Удаление фонов с изображений",
+        prog='remove_background',
+        description='Удалитель Фонов с Изображений',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Примеры использования:
@@ -141,10 +146,20 @@ def main():
     parser.add_argument('-o', '--output', help='Выходной файл изображения')
     parser.add_argument('-d', '--directory', help='Обработать все изображения в директории')
     parser.add_argument('-od', '--output-dir', help='Выходная директория для пакетной обработки')
+    parser.add_argument(
+        '--version', 
+        action='version', 
+        version='%(prog)s 2.0.0'
+    )
     parser.add_argument('-m', '--model', default='u2net',
                        choices=['u2net', 'u2netp', 'u2net_human_seg', 'silueta', 'isnet-general-use'],
                        help='Модель для удаления фона')
     
+    return parser
+
+
+def main():
+    parser = create_parser()
     args = parser.parse_args()
     
     if args.directory:
